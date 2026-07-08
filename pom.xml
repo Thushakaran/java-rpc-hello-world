@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.kelaniya</groupId>
+    <artifactId>java-rpc-helloworld</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!--
+        These two dependencies bring back the classic JAX-WS (javax.xml.ws / javax.jws)
+        APIs that used to ship inside the JDK up to Java 8, but were removed from Java 11+.
+        Version 2.3.x still uses the "javax" namespace, matching the javatpoint tutorial
+        and most JAX-WS textbooks/lecture slides, so it will work on JDK 11, 17, or 21.
+    -->
+    <dependencies>
+        <dependency>
+            <groupId>javax.xml.ws</groupId>
+            <artifactId>jaxws-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>2.3.5</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>java-rpc-helloworld</finalName>
+        <plugins>
+            <!-- Lets us run "mvn exec:java" to start the server or the client -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
+
+            <!--
+                This plugin runs "wsimport" for us automatically at build time.
+                wsimport reads the WSDL published by the server and generates the
+                client-side stub (the client proxy) — this is the "interface compiler"
+                step your lecture notes describe (Section 3, Implementation).
+                It's commented out by default because it needs the server running
+                first. See README.md step 4 for how/when to enable it.
+            -->
+            <!--
+            <plugin>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>4.0.0</version>
+                <executions>
+                    <execution>
+                        <goals><goal>wsimport</goal></goals>
+                        <configuration>
+                            <wsdlUrls>
+                                <wsdlUrl>http://localhost:9999/hello?wsdl</wsdlUrl>
+                            </wsdlUrls>
+                            <keep>true</keep>
+                            <packageName>com.kelaniya.client.stub</packageName>
+                            <sourceDestDir>src/main/java</sourceDestDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+        </plugins>
+    </build>
+</project>
