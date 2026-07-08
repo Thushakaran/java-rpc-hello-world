@@ -4,8 +4,6 @@ This project is a complete, minimal JAX-WS RPC-style HelloWorld system:
 a server that publishes a remote service, and a client that calls it
 over the network as if it were a local method.
 
-## 0. What you're building (in one picture)
-
 ```
  Client (HelloWorldClient.java)                 Server (Publisher.java)
  --------------------------------                --------------------------------
@@ -112,49 +110,3 @@ If `wsimport` isn't available (removed from JDK 11+), uncomment the
 it does the same thing automatically. This generates real `.java` source files
 (a generated proxy class + service class) you can open and show in your article
 as literal proof of "the stub is auto-generated."
-
-## 6. Capture evidence for your article
-
-Take screenshots of:
-- The WSDL in your browser (step 3).
-- Server terminal output + client terminal output side-by-side (step 4).
-- (Optional) The generated stub source file from step 5, if you did it.
-- Your project file structure in IntelliJ.
-
-## 7. Push to GitHub
-
-```
-cd java-rpc-helloworld
-git init
-git add .
-git commit -m "Java RPC HelloWorld using JAX-WS (RPC style)"
-```
-Create a new empty repository on GitHub (no README/license, since you already
-have files), then:
-```
-git remote add origin https://github.com/<your-username>/java-rpc-helloworld.git
-git branch -M main
-git push -u origin main
-```
-
-## 8. Write and publish the Medium article
-
-See `medium-article-outline.md` in this folder — it gives you a section-by-section
-outline with the concepts you need to explain and where your screenshots go. Write
-the actual prose yourself, in your own words, using what you observed in steps 3–4 —
-this is what the plagiarism check is looking for.
-
-## 9. Submit
-
-Submit both links via LMS:
-- Medium article URL
-- GitHub repository URL
-
-## Troubleshooting
-
-| Problem | Fix |
-|---|---|
-| `Address already in use` when starting Publisher | Another process is using port 9999. Change `9999` to another port (e.g. `9998`) in both `Publisher.java` and `HelloWorldClient.java`. |
-| Client can't find service / `WSDLException` | Make sure the server (Publisher) is still running before you start the client. |
-| Maven can't download dependencies | Check your internet connection; corporate/university Wi-Fi sometimes blocks Maven Central — try mobile hotspot once to fetch dependencies, then they're cached locally. |
-| IntelliJ doesn't recognize it as Maven project | Right-click `pom.xml` → Add as Maven Project. |
